@@ -15,28 +15,36 @@ function App() {
 
   const [weather, setWeather] = useState([]);
   const [spinner, setSpinner] = useState(false);
+  const [error, setError] = useState('');
 
   async function weatherData(e) {
-
     e.preventDefault();
-    if (form.city === "") {
-      alert("please add values");
-    } else {
-      setSpinner(true);
-      const data = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${form.city},${form.country}&appid=${API_}`)
-        .then((res) => res.json())
-        .then((data) => data)
+    
+    try {
 
-      setSpinner(false);
-      setWeather(
+      if (form.city === "") {
+        alert("please add values");
+      } else {
+        setSpinner(true);
+        const data = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${form.city},${form.country}&appid=${API_}`)
+          .then((res) => res.json())
+          .then((data) => data)
+  
+        setSpinner(false);
+        setWeather(
+  
+          {
+            data: data
+  
+          }
+  
+        )
+    }
 
-        {
-          data: data
 
-        }
-
-      )
-
+    }catch(e){
+      setError(e.message);
+     
     }
 
   }
@@ -69,9 +77,12 @@ function App() {
 
         </div>
         {spinner && <p> Loading...</p>}
+      <h2> 
+      {error}
+        </h2>  
 
         {
-          weather.data !== undefined ?
+          weather.data != undefined ?
 
             <div>
               <Ui data={weather.data} />

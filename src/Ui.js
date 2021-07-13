@@ -7,15 +7,14 @@ export default function Ui(props) {
 
     const { data } = props;
     console.log(props);
-
-    const iconurl = "http://openweathermap.org/img/wn/" + `${data.cod !== 404 ? data.weather[0].icon : null}` + ".png";
+    const iconurl = "http://openweathermap.org/img/wn/" + `${data.cod != 404 ? data.weather[0].icon : null}` + ".png";
     return (
 
         <>
 
 
 
-            { data.cod !== 404 ?
+            { data.cod != 404 ?
 
                 <React.Fragment>
                     <span> {data.name}, {data.sys.country} </span>
