@@ -6,7 +6,8 @@ import Ui from './Ui';
 
 function App() {
 
-  const API_ = '5184e36ebbcce3264ef673202c02c834';
+  const API_ = 'ADD API TOKEN HERE';
+  
   const [form, setForm] = useState({
     city: "",
     country: ""
